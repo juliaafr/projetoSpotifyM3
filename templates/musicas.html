@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Músicas - ValiMusic</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: white; }
+        .navbar { background-color: #1DB954; }
+        .btn-spotify { background-color: #1DB954; color: white; border: none; }
+        .btn-spotify:hover { background-color: #17a349; color: white; }
+        .table { color: white; }
+        .table-dark { background-color: #1e1e1e; }
+    </style>
 </head>
 <body>
-$END$
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🎵 ValiMusic</a>
+            <div>
+                <a href="/musicas" class="btn btn-dark me-2">Músicas</a>
+                <a href="/albums" class="btn btn-dark me-2">Álbuns</a>
+                <a href="/playlists" class="btn btn-dark">Playlists</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>🎵 Músicas</h2>
+            <a href="/musicas/nova" class="btn btn-spotify">+ Nova Música</a>
+        </div>
+
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Cantor</th>
+                    <th>Ano</th>
+                    <th>Tipo</th>
+                    <th>Álbum</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in musicas %}
+                <tr>
+                    <td>{{ m.id_musica }}</td>
+                    <td>{{ m.nome }}</td>
+                    <td>{{ m.cantor }}</td>
+                    <td>{{ m.ano_lancamento }}</td>
+                    <td>{{ m.tipo }}</td>
+                    <td>{{ m.nome_album }}</td>
+                    <td>
+                        <a href="/musicas/editar/{{ m.id_musica }}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="/musicas/deletar/{{ m.id_musica }}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Deletar essa música?')">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
